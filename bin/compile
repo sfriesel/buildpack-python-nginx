@@ -43,11 +43,11 @@ if [[ ! -d "${CACHE_DIR}/nginx-${NGINX_VERSION}-installed" ]]; then
   readonly t="${CACHE_DIR}/nginx-${NGINX_VERSION}-installed"
   ./configure --prefix="$t" --sbin-path=.nginx/nginx --conf-path=.nginx/nginx.conf \
     --{http,error}-log-path=.nginx/log \
-    --http-client-body-temp-path="$t/.nginx/client_body_temp" \
-    --http-proxy-temp-path="$t/.nginx/proxy_temp" \
-    --http-fastcgi-temp-path="$t/.nginx/fastcgi_temp" \
-    --http-uwsgi-temp-path="$t/.nginx/uwsgi_temp" \
-    --http-scgi-temp-path="$t/.nginx/scgi_temp" \
+    --http-client-body-temp-path=.nginx/client_body_temp \
+    --http-proxy-temp-path=.nginx/proxy_temp \
+    --http-fastcgi-temp-path=.nginx/fastcgi_temp \
+    --http-uwsgi-temp-path=.nginx/uwsgi_temp \
+    --http-scgi-temp-path=.nginx/scgi_temp \
     --pid-path=.nginx/pid --lock-path=.nginx/lock | indent
   make | indent
   make install | indent
