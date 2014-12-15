@@ -33,7 +33,7 @@ if [[ ! -d "${CACHE_DIR}/nginx-${NGINX_VERSION}-installed" ]]; then
   find . -mindepth 1 -delete
 
   echo "-----> Downloading nginx ..."
-  wget -q -P "${cache_dir}" "${NGINX_URL}"
+  wget -q -P "${CACHE_DIR}" "${NGINX_URL}"
   sha256sum --strict --quiet --check <(echo "${NGINX_SHA256}  ${CACHE_DIR}/nginx-${NGINX_VERSION}.tar.gz")
   tar xf "${CACHE_DIR}/nginx-${NGINX_VERSION}.tar.gz" -C "${CACHE_DIR}"
 
