@@ -1,0 +1,5 @@
+#!/bin/bash
+cat <<EOF
+config_vars:
+
+EOF
