@@ -8,9 +8,9 @@ readonly BP_DIR="$(dirname "$(dirname "$(readlink -f "$0")")")"
 mkdir -p "$CACHE_DIR"
 
 mkdir -p "$CACHE_DIR/nginx"
-$BP_DIR/parts/nginx/compile "$1" "$CACHE_DIR/nginx"
+$BP_DIR/parts/nginx/bin/compile "$1" "$CACHE_DIR/nginx"
 
 mkdir -p "$CACHE_DIR/python"
-$BP_DIR/parts/python/compile "$1" "$CACHE_DIR/python"
+$BP_DIR/parts/python/bin/compile "$1" "$CACHE_DIR/python"
 
 $CC -o nginx-wrapped "$BP_DIR/wrap.c"
