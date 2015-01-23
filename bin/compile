@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+readonly BUILD_DIR="$1"
+readonly CACHE_DIR="$2"
+readonly BP_DIR="$(dirname "$(dirname "$(readlink -f "$0")")")"
+
+mkdir -p "$CACHE_DIR"
+
+mdkir -p "$CACHE_DIR/nginx"
+$BP_DIR/parts/nginx/compile "$1" "$CACHE_DIR/nginx"
+
+mdkir -p "$CACHE_DIR/python"
+$BP_DIR/parts/python/compile "$1" "$CACHE_DIR/python"
