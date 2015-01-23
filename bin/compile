@@ -13,4 +13,5 @@ $BP_DIR/parts/nginx/bin/compile "$1" "$CACHE_DIR/nginx"
 mkdir -p "$CACHE_DIR/python"
 $BP_DIR/parts/python/bin/compile "$1" "$CACHE_DIR/python"
 
+cd $BUILD_DIR
 cc -o nginx-wrapped "$BP_DIR/wrap.c"
