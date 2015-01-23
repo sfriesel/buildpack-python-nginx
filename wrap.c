@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 		sa.sa_handler = SIG_DFL;
 		exit_on_error(sigaction(SIGCHLD, &sa, 0) == -1, "sigaction");
 		exit_on_error(sigaction(SIGTERM, &sa, 0) == -1, "sigaction");
-		execv(argv[1], argv + 1);
+		execvp(argv[1], argv + 1);
 		exit_on_error(1, "execv");
 	}
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 		sa.sa_handler = SIG_DFL;
 		exit_on_error(sigaction(SIGCHLD, &sa, 0) == -1, "sigaction");
 		exit_on_error(sigaction(SIGTERM, &sa, 0) == -1, "sigaction");
-		execl("./parts/nginx/start-nginx", "start-nginx");
+		execl("./nginx/start", "start");
 		exit_on_error(1, "execl");
 	}
 
