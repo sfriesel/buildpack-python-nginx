@@ -77,4 +77,5 @@ int main(int argc, char *argv[]) {
 	} else {
 		fputs("app stopped\n", stderr);
 	}
+	return 1;
 }
