@@ -22,3 +22,9 @@ cd $1
 mv $2/Python-2.7.9-installed .python
 .python/bin/python -m ensurepip
 .python/bin/pip install -r requirements.txt
+
+mkdir -p .profile.d
+cat > .profile.d/python-path.sh <<EOF
+APP_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+export PATH="$APP_DIR/.python/bin:$PATH"
+EOF
