@@ -26,7 +26,8 @@ cp -rT $CACHEDIR/Python-2.7.9-installed .python
 .python/bin/pip install -r requirements.txt
 
 mkdir -p .profile.d
-cat > .profile.d/python-path.sh <<EOF
-APP_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
-export PATH="$APP_DIR/.python/bin:$PATH"
+cat > .profile.d/python-path.sh <<'EOF'
+APPDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+export PATH="$APPDIR/.python/bin:$PATH"
+sed -i '1 s|^#!.*/.python/bin/python|#!'$APPDIR'/.python/bin/python|' $APPDIR/.python/bin/*
 EOF
