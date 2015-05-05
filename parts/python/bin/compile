@@ -7,7 +7,7 @@ readonly BUILDDIR=$1
 readonly CACHEDIR=$2
 
 cd "$BUILDDIR"
-if [[ ! -x $CACHEDIR/Python-2.7.9-installed/bin/python ]]; then
+if [[ $($CACHEDIR/Python-2.7.9-installed --version) != "Python 2.7.9" ]]; then
 	SOURCE_TARBALL='http://python.org/ftp/python/2.7.9/Python-2.7.9.tgz'
 	rm -rf CACHEDIR/*
 	mkdir $2/Python-2.7.9-src
@@ -20,8 +20,8 @@ if [[ ! -x $CACHEDIR/Python-2.7.9-installed/bin/python ]]; then
 	rm -rf $CACHEDIR/Python-2.7.9-src
 	cd $BUILDDIR
 	mkdir -p .python
-	cp -rT $CACHEDIR/Python-2.7.9-installed .python
 fi
+cp -rT $CACHEDIR/Python-2.7.9-installed .python
 .python/bin/python -m ensurepip
 .python/bin/pip install -r requirements.txt
 
