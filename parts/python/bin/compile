@@ -7,19 +7,21 @@ readonly BUILDDIR=$1
 readonly CACHEDIR=$2
 
 cd "$BUILDDIR"
-rm -rf .python
-SOURCE_TARBALL='http://python.org/ftp/python/2.7.9/Python-2.7.9.tgz'
-rm -rf $2/*
-mkdir $2/Python-2.7.9-src
-mkdir $2/Python-2.7.9-installed
-curl -L "$SOURCE_TARBALL" | tar -xz --strip-components=1 -C $2/Python-2.7.9-src
-cd $2/Python-2.7.9-src
-./configure --prefix=$2/Python-2.7.9-installed
-make
-make install
-rm -rf $2/Python-2.7.9-src
-cd $1
-mv $2/Python-2.7.9-installed .python
+if [[ ! -x $CACHEDIR/Python-2.7.9-installed/bin/python ]]; then
+	SOURCE_TARBALL='http://python.org/ftp/python/2.7.9/Python-2.7.9.tgz'
+	rm -rf CACHEDIR/*
+	mkdir $2/Python-2.7.9-src
+	mkdir $2/Python-2.7.9-installed
+	curl -L "$SOURCE_TARBALL" | tar -xz --strip-components=1 -C $CACHEDIR/Python-2.7.9-src
+	cd $CACHEDIR/Python-2.7.9-src
+	./configure --prefix=$CACHEDIR/Python-2.7.9-installed
+	make
+	make install
+	rm -rf $CACHEDIR/Python-2.7.9-src
+	cd $BUILDDIR
+	mkdir -p .python
+	cp -rT $CACHEDIR/Python-2.7.9-installed .python
+fi
 .python/bin/python -m ensurepip
 .python/bin/pip install -r requirements.txt
 
